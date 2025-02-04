@@ -3,6 +3,9 @@ import Icons from '../global/icons';
 import { buttonVariants } from '../ui/button';
 import { currentUser } from '@clerk/nextjs/server';
 import { UserButton } from '@clerk/nextjs';
+import { WalletDefault } from '@coinbase/onchainkit/wallet';
+ 
+
 
 export async function Navbar() {
   const user = await currentUser();
@@ -35,7 +38,10 @@ export async function Navbar() {
 
         <div className="flex items-center gap-4">
           {user ? (
+            <>
             <UserButton />
+            <WalletDefault />
+              </>
           ) : (
             <>
               {/* Login button */}

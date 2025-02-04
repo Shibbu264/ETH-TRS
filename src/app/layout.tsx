@@ -1,16 +1,18 @@
+"use client"
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
 import { Poppins } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
-import { SITE_CONFIG } from '@/config';
-
+import { OnchainKitProvider } from '@coinbase/onchainkit';
+import { base } from 'wagmi/chains';
+import '@coinbase/onchainkit/styles.css'; 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
 });
 
-export const metadata = SITE_CONFIG;
+
 
 export default function RootLayout({
   children,
@@ -25,9 +27,14 @@ export default function RootLayout({
           poppins.className
         )}
       >
-        <ClerkProvider appearance={{ baseTheme: dark }}>
-          {children}
-        </ClerkProvider>
+        <OnchainKitProvider
+          apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+          chain={base} // add baseSepolia for testing
+        >
+          <ClerkProvider appearance={{ baseTheme: dark }}>
+            {children}
+          </ClerkProvider>
+        </OnchainKitProvider>
       </body>
     </html>
   );
