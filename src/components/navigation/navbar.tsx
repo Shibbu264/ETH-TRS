@@ -4,6 +4,7 @@ import { buttonVariants } from '../ui/button';
 import { currentUser } from '@clerk/nextjs/server';
 import { UserButton } from '@clerk/nextjs';
 import { WalletDefault } from '@coinbase/onchainkit/wallet';
+import { WalletComponents } from '../trade/WalletComponent';
  
 
 
@@ -40,7 +41,7 @@ export async function Navbar() {
           {user ? (
             <>
             <UserButton />
-            <WalletDefault />
+            <WalletComponents/>
               </>
           ) : (
             <>
